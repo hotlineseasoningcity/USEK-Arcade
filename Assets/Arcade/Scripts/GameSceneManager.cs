@@ -7,11 +7,10 @@ namespace Arcade
 {
     public class GameSceneManager: MonoBehaviour
     {
-        public static string CurrentGameId;
 
         public static void StartGame()
         {
-            SceneManager.LoadScene($"{CurrentGameId}_menu");
+            SceneManager.LoadScene($"{GameData.CurrentGameId}_menu");
         }
 
         private void Update()

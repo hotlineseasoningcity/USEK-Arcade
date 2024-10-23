@@ -1,46 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Arcade
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GameData")]
-    public class GameData : ScriptableObject
+    public static class GameData
     {
-        public string GameName;
-        public string GameID;
-        public List<GameVariable> StartGameData;
+        public static string CurrentGameId;
+        //{
+        //    get {
+        //        string _currID = SceneManager.GetActiveScene().name.Split('_')[0];
+        //        if (_currID != CurrentGameId)
+        //            CurrentGameId = _currID;
+        //            return  }
+        //    set { }
+        //}
 
-        [System.Serializable]
-        public class GameVariable
+        public static void Set(string id, int value)
         {
-            public VarType type;
-            public string identifier;
-            [SerializeField]
-            string startValue;
-            string currentValue;
+            id = $"{CurrentGameId}_{id}";
+            PlayerPrefs.SetInt(id, value);
+        }
+        public static void Set(string id, string value)
+        {
+            id = $"{CurrentGameId}_{id}";
+            PlayerPrefs.SetString(id, value);
+        }
+        public static void Set(string id, float value)
+        {
+            id = $"{CurrentGameId}_{id}";
+            PlayerPrefs.SetFloat(id, value);
+        }
 
-            public bool Get()
-            {
-                if(type == VarType.Bool)
-                {
-                    if (currentValue == "True")
-                        return true;
-                    else if (currentValue == "False")
-                        return false;
-                }
-                Debug.LogError("");
-                return false;
-            }
-
-            public enum VarType
-            {
-                Bool,
-                Int,
-                Float,
-                String
-            }
+        public static int GetInt(string id)
+        {
+            id = $"{CurrentGameId}_{id}";
+            int value = PlayerPrefs.GetInt(id);
+            return value;
+        }
+        public static string GetString(string id)
+        {
+            id = $"{CurrentGameId}_{id}";
+            string value = PlayerPrefs.GetString(id);
+            return value;
+        }
+        public static float GetFloat(string id)
+        {
+            id = $"{CurrentGameId}_{id}";
+            float value = PlayerPrefs.GetFloat(id);
+            return value;
         }
     }
-
 }

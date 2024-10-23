@@ -73,7 +73,7 @@ namespace Arcade
                 Debug.LogError("No games listed");
                 return;
             }
-            GameSceneManager.CurrentGameId = _gamesInfo[_index].GameID;
+            GameData.CurrentGameId = _gamesInfo[_index].GameID;
             GameSceneManager.StartGame();
         }
 
