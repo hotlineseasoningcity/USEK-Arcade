@@ -78,7 +78,7 @@ namespace Arcade
         {
             if (!_showingTextLine)
             {
-                Debug.Log("NEXT SCENE");
+                GameSceneManager.NextLevel();
             }
             else
             {
