@@ -2,18 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BossEnemy : MonoBehaviour
 {
     //public GameManager gm;
-    //public Transform spawnBigBullet;
-    //public GameObject bigBullet;
-    //public Transform player;
-    public Transform spawnEnemies;
+    //public ScriptPlayer player;
+
+    public Canvas canvasJuego;
+    public Image bossHealthBar;
+    public TextMeshProUGUI textoBossFight;
+    public string textoFinal;
+
+    public Transform[] spawnEnemies;
+    //public int spawnIndex;
     public GameObject enemyToSpawn;
     public float lifeMax, life;
     public bool isProtected;
+    public float damage;
 
+
+    IEnumerator BossDeath()
+    {
+        Debug.Log("Boss muriendo epicamente");
+        yield return new WaitForSeconds(3);
+        BossDie();
+    }
 
     void Health()
     {
@@ -21,10 +35,20 @@ public class BossEnemy : MonoBehaviour
         {
             life = lifeMax;
         }
-        else if (life >= 0)
+        else if (life <= 0)
         {
-            BossDie();
+            StartCoroutine(BossDeath());
         }
+    }
+
+    void UpdateHealth()
+    {
+        bossHealthBar.fillAmount = life / lifeMax;
+    }
+
+    void HealPlayerUponSpawn()
+    {
+
     }
 
     public void TakeDamage(float dmg)
@@ -39,13 +63,15 @@ public class BossEnemy : MonoBehaviour
             life -= dmg;
         }
         Health();
-
-
+        UpdateHealth();
     }
 
     void BossDie()
     {
+        this.gameObject.SetActive(!gameObject.activeSelf);
 
+        canvasJuego.gameObject.SetActive(!gameObject.activeSelf);
+        textoBossFight.text = textoFinal;
     }
 
     public void ActivateShield()
@@ -62,7 +88,7 @@ public class BossEnemy : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
+        Instantiate(enemyToSpawn, spawnEnemies[spawnEnemies.Length].position, transform.rotation);
     }
 
     void Attack()
@@ -72,15 +98,15 @@ public class BossEnemy : MonoBehaviour
 
     void ChargeAttack(bool isAttacking, float bulletPow, float bulletPowTarget)
     {
-        if (isAttacking)
+        while (isAttacking)
         {
             bulletPow += Time.deltaTime;
-        }
-        if (bulletPow >= bulletPowTarget)
-        {
-            Attack();
-            bulletPow = 0;
-            isAttacking = false;
+            if (bulletPow >= bulletPowTarget)
+            {
+                Attack();
+                bulletPow = 0;
+                isAttacking = false;
+            }
         }
     }
 
@@ -88,11 +114,13 @@ public class BossEnemy : MonoBehaviour
     void Start()
     {
         life = lifeMax;
+
+        HealPlayerUponSpawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

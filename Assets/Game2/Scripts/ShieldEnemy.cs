@@ -5,11 +5,9 @@ using UnityEngine;
 public class ShieldEnemy : MonoBehaviour
 {
     public BossEnemy bigBoss;
-    public float lifeMax;
-    public float life;
+    public float lifeMax, life;
     public bool isShielding;
-    public float shieldTime;
-    public float shieldTimeTarget;
+    public float shieldTime, shieldTimeTarget;
 
 
     void ProtectEnemy(float shieldDistance, Transform targetToProtect)
