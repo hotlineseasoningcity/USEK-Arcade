@@ -77,13 +77,13 @@ public class BossEnemy : MonoBehaviour
     public void ActivateShield()
     {
         isProtected = true;
-        
+        Debug.Log("protegido");
     }
 
     public void DeactivateShield()
     {
         isProtected = false;
-        
+        Debug.Log("no protegido");
     }
 
     void SpawnEnemy()
@@ -98,7 +98,7 @@ public class BossEnemy : MonoBehaviour
 
     void ChargeAttack(bool isAttacking, float bulletPow, float bulletPowTarget)
     {
-        while (isAttacking)
+        if (isAttacking)
         {
             bulletPow += Time.deltaTime;
             if (bulletPow >= bulletPowTarget)
