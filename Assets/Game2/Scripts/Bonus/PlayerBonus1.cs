@@ -20,7 +20,7 @@ public class PlayerBonus1 : MonoBehaviour
             myTFT.position += dir * Time.deltaTime * spd;
         }
 
-        else if (input == Vector2.up || input == Vector2.down)
+        if (input == Vector2.up || input == Vector2.down)
         {
             Vector3 dir = new Vector2(0, input.y);
             myTFT.position += dir * Time.deltaTime * spd;
