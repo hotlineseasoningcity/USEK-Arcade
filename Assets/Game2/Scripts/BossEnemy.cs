@@ -16,11 +16,14 @@ public class BossEnemy : MonoBehaviour
     public Sprite[] bossState;
 
     public Transform bossEnemy;
+    public BossEnemy boss;
     public Transform spawnEnemies;
+    public Transform[] enemyGoToPos;
     //public int spawnIndex;
     public GameObject enemyToSpawn;
     public float lifeMax, life;
     public bool isProtected;
+    public float timeShield, timeForShield;
     public float damage;
 
 
@@ -90,9 +93,29 @@ public class BossEnemy : MonoBehaviour
         bossMode.sprite = bossState[0];
     }
 
+    void TimeToShield()
+    {
+        if (!isProtected)
+        {
+            timeShield += Time.deltaTime;
+            if (timeShield >= timeForShield)
+            {
+                timeShield = 0;
+                SpawnEnemy();
+                timeForShield = Random.Range(8, 10);
+            }
+        }
+    }
+
     void SpawnEnemy()
     {
-        Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
+        GameObject newEnemy = Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
+        ShieldEnemy enemy = newEnemy.GetComponent<ShieldEnemy>();
+        enemy.lifeMax = 4;
+        enemy.distanceShield = 5;
+        enemy.bigBoss = boss;
+        enemy.protectTarget = bossEnemy;
+        enemy.enemyGoTo = enemyGoToPos;
     }
 
     void Attack()
@@ -118,6 +141,7 @@ public class BossEnemy : MonoBehaviour
     void Start()
     {
         life = lifeMax;
+        timeForShield = 5;
 
         HealPlayerUponSpawn();
     }
@@ -125,6 +149,7 @@ public class BossEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TimeToShield();
 
     }
 }

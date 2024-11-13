@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7602718857600683976}
   m_Father: {fileID: 0}
@@ -47,15 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bigBoss: {fileID: 0}
-  lifeMax: 5
+  lifeMax: 0
   life: 0
-  spd: 0
+  spd: 1.2
   isShielding: 0
   isProtecting: 0
   shieldTime: 0
   shieldTimeTarget: 5
+  timeDisapear: 0
   protectTarget: {fileID: 0}
-  distanceShield: 8
+  enemyGoTo: []
+  posIndex: 0
+  distanceShield: 0
 --- !u!58 &7053393930543933230
 CircleCollider2D:
   m_ObjectHideFlags: 0
