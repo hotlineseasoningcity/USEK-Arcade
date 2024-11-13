@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Enemy2 : EnemyBehavior
 {
-    // modificar virtuales
+    public override void Patrol()
+    {
+        base.Patrol();
+    }
 }

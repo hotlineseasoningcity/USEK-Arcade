@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    public Transform player;
+    public float enemySpd;
+    public Transform player, enemyPos;
+    public Transform[] patrolPos;
     public GameObject enemyPref, bulletPref;
     bool onShootingRange = false;
 
@@ -18,23 +20,23 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    protected virtual void Patrol(Transform[] patrolPos, Transform enemyPos, float enemySpd)
+    public virtual void Patrol()
     {
-        bool isPatrolling = true;
-        int randomI = Random.Range(0, patrolPos.Length);
+        enemyPos.position = patrolPos[0].position;
 
-        while (isPatrolling)
+        if (patrolPos.Length == 0) return;
+
+        for (int i = 0; i < patrolPos.Length; i++)
         {
-            Vector3 dir = patrolPos[randomI].position - enemyPos.position;
-            dir.Normalize();
-            enemyPos.position += enemySpd * Time.deltaTime * dir;
 
-            if (Vector2.Distance(enemyPos.position, patrolPos[randomI].position) <= 0.4f)
+            Vector3 direction = patrolPos[i].position - enemyPos.position;
+            direction.Normalize();
+            enemyPos.position += enemySpd * Time.deltaTime * direction;
+
+            if (Vector3.Distance(enemyPos.position, patrolPos[i].position) <= 1f)
             {
-                isPatrolling = false;
-                ChasePlayer(enemyPos, enemySpd, 10);
+                i++;
             }
-            else _ = Random.Range(0, patrolPos.Length);
         }
     }
 
