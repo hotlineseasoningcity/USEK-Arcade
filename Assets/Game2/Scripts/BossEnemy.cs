@@ -13,8 +13,10 @@ public class BossEnemy : MonoBehaviour
     public Image bossHealthBar;
     public TextMeshProUGUI textoBossFight;
     public string textoFinal;
+    public Sprite[] bossState;
 
-    public Transform[] spawnEnemies;
+    public Transform bossEnemy;
+    public Transform spawnEnemies;
     //public int spawnIndex;
     public GameObject enemyToSpawn;
     public float lifeMax, life;
@@ -77,18 +79,20 @@ public class BossEnemy : MonoBehaviour
     public void ActivateShield()
     {
         isProtected = true;
-        Debug.Log("protegido");
+        SpriteRenderer bossMode = GetComponent<SpriteRenderer>();
+        bossMode.sprite = bossState[1];
     }
 
     public void DeactivateShield()
     {
         isProtected = false;
-        Debug.Log("no protegido");
+        SpriteRenderer bossMode = GetComponent<SpriteRenderer>();
+        bossMode.sprite = bossState[0];
     }
 
     void SpawnEnemy()
     {
-        Instantiate(enemyToSpawn, spawnEnemies[spawnEnemies.Length].position, transform.rotation);
+        Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
     }
 
     void Attack()
