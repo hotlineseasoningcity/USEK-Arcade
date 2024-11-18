@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class BonusCollect : MonoBehaviour
 {
-    public TextMeshProUGUI points;
-    public int batterys;
+    public Image[] images;
+    public GameObject prefabPill;
+    public int index = -1;
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        points = GetComponent<TextMeshProUGUI>();
+        if (collision.transform.CompareTag("Battery"))
+        {
+            index++;
+            PillFill(index);
+            Destroy(collision.gameObject);
+            Debug.Log("metocaste");
+        }
     }
-    private void Update()
+    void PillFill(int _index)
     {
-        points.text = batterys.ToString();
+        for (int i = 0; i < images.Length; i++)
+        {
+            images[i].color = Color.grey;
+        }
+        for (int j = 0; j <= _index; j++)
+        {
+            images[j].color = Color.white;
+        }
     }
 
-    public void Collect()
-    {
-        batterys += 1;
-    }
-    
 }

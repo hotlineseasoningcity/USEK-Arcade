@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPrueba : MonoBehaviour
 {
-    public Transform positionA, positionB, tPlayer;
+    public Transform positionA, positionB;
 
     public float speed = 10;
 
@@ -25,20 +25,7 @@ public class EnemyPrueba : MonoBehaviour
 
     void Update()
     {
-        if (radio >= (tPlayer.position - enemyTransformPosition.position).magnitude)
-        {
-            isEnemyInZone = true;
-        }
-        else
-        {
-            isEnemyInZone = false;
-        }
-        if (isEnemyInZone)
-        {
-            direction = tPlayer.position - enemyTransformPosition.position;
-
-        }
-        else if (isRight)
+        if (isRight)
         {
             direction = positionB.position - enemyTransformPosition.position;
         }
