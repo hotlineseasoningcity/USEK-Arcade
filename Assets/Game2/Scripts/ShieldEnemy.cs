@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldEnemy : MonoBehaviour
+public class ShieldEnemy : MonoBehaviour, IDamageable
 {
     public BossEnemy bigBoss;
     public float lifeMax, life;
@@ -30,7 +30,7 @@ public class ShieldEnemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float dmg)
+    public void Damage(float dmg)
     {
         if (dmg == 0)
         {

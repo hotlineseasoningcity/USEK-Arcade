@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossEnemy : MonoBehaviour
+public class BossEnemy : MonoBehaviour, IDamageable
 {
     //public GameManager gm;
-    //public ScriptPlayer player;
+    public PlayerTest player;
 
     public Canvas canvasJuego;
     public Image bossHealthBar;
@@ -22,9 +22,9 @@ public class BossEnemy : MonoBehaviour
     //public int spawnIndex;
     public GameObject enemyToSpawn;
     public float lifeMax, life;
-    public bool isProtected;
+    public bool isProtected, isAttacking;
     public float timeShield, timeForShield;
-    public float damage;
+    public float damage, bulletPow, bulletPowTarget;
 
 
     IEnumerator BossDeath()
@@ -53,10 +53,10 @@ public class BossEnemy : MonoBehaviour
 
     void HealPlayerUponSpawn()
     {
-
+        player.life = player.maxLife;
     }
 
-    public void TakeDamage(float dmg)
+    public void Damage(float dmg)
     {
         if (dmg == 0)
         {
@@ -120,10 +120,10 @@ public class BossEnemy : MonoBehaviour
 
     void Attack()
     {
-        
+        player.TakeDamage(damage);
     }
 
-    void ChargeAttack(bool isAttacking, float bulletPow, float bulletPowTarget)
+    void ChargeAttack()
     {
         if (isAttacking)
         {
@@ -150,6 +150,6 @@ public class BossEnemy : MonoBehaviour
     void Update()
     {
         TimeToShield();
-
+        ChargeAttack();
     }
 }
