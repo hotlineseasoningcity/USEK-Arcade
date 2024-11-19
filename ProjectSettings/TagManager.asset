@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+<<<<<<< HEAD
   - Battery
+=======
+>>>>>>> 75dae6b535c19a9517ef897c1e89ff35d04345f4
   layers:
   - Default
   - TransparentFX
