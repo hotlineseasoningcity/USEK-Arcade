@@ -12,10 +12,8 @@ public class Crosshair : MonoBehaviour
         float x = input.x;
         float y = input.y;
 
-        Vector3 dir = new(x, y);
-        dir.Normalize();
-        crosshair.position += spd * Time.deltaTime * dir;
-
-        Debug.Log("move");
+        Vector3 direction = new(x, y);
+        direction.Normalize();
+        crosshair.position += spd * Time.deltaTime * direction;
     }
 }

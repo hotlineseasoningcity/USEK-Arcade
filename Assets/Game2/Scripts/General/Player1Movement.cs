@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player1Movement : MonoBehaviour
 {
     public float spd, scaleSpd;
-    public Transform player;
+    public Transform player, background;
 
     SpriteRenderer sr;
     Vector3 originalScale;
@@ -24,14 +24,17 @@ public class Player1Movement : MonoBehaviour
         player.position += spd * Time.deltaTime * dir;
 
         Vector3 scale = new(scaleSpd, scaleSpd, scaleSpd);
+        Vector3 minScale = Vector3.one;
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.localScale += scale;
+            background.localScale += scale;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.localScale -= scale;
+            background.localScale -= scale;
+
+            background.localScale = new Vector3(Mathf.Max(background.localScale.x, minScale.x), Mathf.Max(background.localScale.y, minScale.y), Mathf.Max(background.localScale.z, minScale.z));
         }
     }
 }

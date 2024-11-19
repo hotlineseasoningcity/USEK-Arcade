@@ -8,4 +8,15 @@ public class Enemy2 : EnemyBehavior
     {
         base.Patrol();
     }
+
+    protected override void Shoot()
+    {
+       base.Shoot();
+    }
+
+    void Update()
+    {
+        ChasePlayer();
+        Shoot();
+    }
 }
