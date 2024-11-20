@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-<<<<<<< HEAD
-  - Battery
-=======
->>>>>>> 75dae6b535c19a9517ef897c1e89ff35d04345f4
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -45,10 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 3022699777
-    locked: 0
-  - name: Players
-    uniqueID: 168049363
     locked: 0
