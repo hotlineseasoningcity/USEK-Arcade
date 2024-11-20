@@ -31,6 +31,7 @@ public class MovementP2 : MonoBehaviour
 
 
             myTFT.position += dir * Time.deltaTime * speed * acceleration;
+            transform.up = dir;
         }
 
     }

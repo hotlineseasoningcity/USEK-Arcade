@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class BonusCollect : MonoBehaviour
+public class BonusCollectLevel2 : MonoBehaviour
 {
     public Image[] images;
     public GameObject prefabPill;
