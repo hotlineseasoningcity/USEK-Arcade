@@ -36,7 +36,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         BossDie();
     }
 
-    void Health()
+    void HealthCheck()
     {
         if (life > lifeMax)
         {
@@ -58,7 +58,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         player.life = player.maxLife;
     }
 
-    public void Damage(float dmg)
+    public void TakeDamage(float dmg)
     {
         if (dmg == 0)
         {
@@ -70,7 +70,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
             life -= dmg;
             timeToAttack -= Random.Range(3, 5); 
         }
-        Health();
+        HealthCheck();
         UpdateHealth();
     }
 
