@@ -8,6 +8,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
 {
     //public GameManager gm;
     public PlayerTest player;
+    public Crosshair crosshair;
 
     public Canvas canvasJuego;
     public Image bossHealthBar;
@@ -25,6 +26,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public bool isProtected, isAttacking;
     public float timeShield, timeForShield;
     public float damage, bulletPow, bulletPowTarget;
+    public float timeToAttack, timeToTarget;
 
 
     IEnumerator BossDeath()
@@ -66,6 +68,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         if (!isProtected)
         {
             life -= dmg;
+            timeToAttack -= Random.Range(3, 5); 
         }
         Health();
         UpdateHealth();
@@ -74,6 +77,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     void BossDie()
     {
         this.gameObject.SetActive(!gameObject.activeSelf);
+        textoFinal = "Victoria";
 
         canvasJuego.gameObject.SetActive(!gameObject.activeSelf);
         textoBossFight.text = textoFinal;
@@ -101,6 +105,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
             if (timeShield >= timeForShield)
             {
                 timeShield = 0;
+                //timeToAttack = 0;
                 SpawnEnemy();
                 timeForShield = Random.Range(8, 10);
             }
@@ -125,23 +130,43 @@ public class BossEnemy : MonoBehaviour, IDamageable
 
     void ChargeAttack()
     {
-        if (isAttacking)
+        if (!isProtected)
         {
-            bulletPow += Time.deltaTime;
-            if (bulletPow >= bulletPowTarget)
+            timeToAttack += Time.deltaTime;
+
+            if (timeToAttack >= timeToTarget)
             {
-                Attack();
-                bulletPow = 0;
-                isAttacking = false;
+                timeToAttack = 0;
+                isAttacking = true;
+                timeToTarget = Random.Range(6, 8);
             }
+
+            if (isAttacking)
+            {
+                bulletPow += Time.deltaTime;
+                if (bulletPow >= bulletPowTarget)
+                {
+                    Attack();
+                    bulletPow = 0;
+                    isAttacking = false;
+                }
+            }
+        }
+
+        if (timeToAttack < 0)
+        {
+            timeToAttack = 0;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        textoFinal = "";
         life = lifeMax;
         timeForShield = 5;
+        timeToTarget = 10;
+        damage = 2;
 
         HealPlayerUponSpawn();
     }
