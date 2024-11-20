@@ -1076,7 +1076,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &176163921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1782,12 +1782,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd1165ed88abc4b83b6f78e1534792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionA: {fileID: 1764609223}
-  positionB: {fileID: 1641537768}
-  speed: 3
-  direction: {x: 0, y: 0}
-  radio: 1
-  isRight: 1
+  spd: 3
+  rangeToChangeTarget: 1
+  point1: {fileID: 1764609223}
+  point2: {fileID: 1641537768}
 --- !u!50 &335664770
 Rigidbody2D:
   serializedVersion: 4
@@ -2623,12 +2621,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd1165ed88abc4b83b6f78e1534792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionA: {fileID: 1912944852}
-  positionB: {fileID: 1976144209}
-  speed: 3
-  direction: {x: 0, y: 0}
-  radio: 1
-  isRight: 1
+  spd: 3
+  rangeToChangeTarget: 1
+  point1: {fileID: 1912944852}
+  point2: {fileID: 1976144209}
 --- !u!50 &484863339
 Rigidbody2D:
   serializedVersion: 4
@@ -4383,12 +4379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd1165ed88abc4b83b6f78e1534792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionA: {fileID: 1159348317}
-  positionB: {fileID: 511844608}
-  speed: 3
-  direction: {x: 0, y: 0}
-  radio: 1
-  isRight: 1
+  spd: 3
+  rangeToChangeTarget: 1
+  point1: {fileID: 1159348317}
+  point2: {fileID: 511844608}
 --- !u!212 &866654659
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6200,12 +6194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd1165ed88abc4b83b6f78e1534792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionA: {fileID: 662201938}
-  positionB: {fileID: 1910348227}
-  speed: 3
-  direction: {x: 0, y: 0}
-  radio: 1
-  isRight: 1
+  spd: 3
+  rangeToChangeTarget: 1
+  point1: {fileID: 662201938}
+  point2: {fileID: 1910348227}
 --- !u!50 &1169307600
 Rigidbody2D:
   serializedVersion: 4
@@ -6232,7 +6224,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 3
 --- !u!61 &1169307601
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9956,12 +9948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bd1165ed88abc4b83b6f78e1534792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionA: {fileID: 1088606763}
-  positionB: {fileID: 1362779174}
-  speed: 3
-  direction: {x: 0, y: 0}
-  radio: 1
-  isRight: 1
+  spd: 3
+  rangeToChangeTarget: 1
+  point1: {fileID: 1088606763}
+  point2: {fileID: 1362779174}
 --- !u!50 &1975784421
 Rigidbody2D:
   serializedVersion: 4
