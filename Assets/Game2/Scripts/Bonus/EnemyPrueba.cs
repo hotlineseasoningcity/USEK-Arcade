@@ -16,7 +16,6 @@ public class EnemyPrueba : MonoBehaviour
 
     public bool isRight = true;
 
-    public bool isEnemyInZone = false;
 
     void Start()
     {
@@ -40,11 +39,6 @@ public class EnemyPrueba : MonoBehaviour
 
         enemyTransformPosition.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
 
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, radio);
     }
 }
