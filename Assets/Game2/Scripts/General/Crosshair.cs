@@ -6,6 +6,7 @@ public class Crosshair : MonoBehaviour
 {
     public float spd;
     public Transform crosshair;
+    Collider2D currentEnemy;
 
     public void Movement(Vector2 input)
     {
@@ -15,5 +16,31 @@ public class Crosshair : MonoBehaviour
         Vector3 direction = new(x, y);
         direction.Normalize();
         crosshair.position += spd * Time.deltaTime * direction;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            currentEnemy = other;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            currentEnemy = null;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z) && currentEnemy != null)
+        {
+            Destroy(currentEnemy.gameObject);
+            Debug.Log("enemy dead");
+            currentEnemy = null;
+        }
     }
 }

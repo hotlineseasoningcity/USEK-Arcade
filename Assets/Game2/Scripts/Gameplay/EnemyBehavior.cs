@@ -5,32 +5,22 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     public float enemySpd, chaseRange, shootCoolDown, bulletForce;
-    public Transform player, enemyPos, spawnBullet;
+    public Transform player, spawnBullet;
     public Transform[] patrolPos;
-    public GameObject enemyPref, bulletPref;
-    bool onShootingRange = false;
+    public GameObject bulletPref;
+    bool isChasing = false, onShootingRange = false;
     int currentPatrolIndex;
     float timer = 0;
 
-    public void SpawnEnemy(Transform[] spawnPos)
-    {
-        int randomI = Random.Range(0, spawnPos.Length);
-
-        for (int i = 0; i < 4; i++)
-        {
-            _ = Instantiate(enemyPref, spawnPos[randomI].position, Quaternion.identity);
-        }
-    }
-
-    public virtual void Patrol()
+    void Patrol()
     {
         if (patrolPos.Length == 0) return;
 
-        Vector3 direction = patrolPos[currentPatrolIndex].position - enemyPos.position;
+        Vector3 direction = patrolPos[currentPatrolIndex].position - transform.position;
         direction.Normalize();
-        enemyPos.position += enemySpd * Time.deltaTime * direction;
+        transform.position += enemySpd * Time.deltaTime * direction;
 
-        if (Vector3.Distance(enemyPos.position, patrolPos[currentPatrolIndex].position) <= 1f)
+        if (Vector3.Distance(transform.position, patrolPos[currentPatrolIndex].position) <= 1f)
         {
             currentPatrolIndex++;
         }
@@ -41,20 +31,29 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void ChasePlayer()
+    void CheckForPlayer()
     {
-        float distanceToPlayer = Vector3.Distance(enemyPos.position, player.position);
-
-        if (distanceToPlayer >= chaseRange)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        
+        if (distanceToPlayer < chaseRange)
         {
-            onShootingRange = true;
-            Vector3 direction = player.position - enemyPos.position;
-            direction.Normalize();
-            enemyPos.position += enemySpd * Time.deltaTime * direction;
+            isChasing = true;
+        }
+        else
+        {
+            isChasing = false;
         }
     }
 
-    protected virtual void Shoot()
+    void ChasePlayer()
+    {
+        onShootingRange = true;
+        Vector3 direction = player.position - transform.position;
+        direction.Normalize();
+        transform.position += enemySpd * Time.deltaTime * direction;
+    }
+
+    void Shoot()
     {
         timer += Time.deltaTime;
 
@@ -70,7 +69,7 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    protected virtual void TakeDamage(int damage, GameObject enemy)
+    public void TakeDamage(int damage, GameObject enemy)
     {
         int hp = 2;
         int currentHp = hp;
@@ -81,5 +80,19 @@ public class EnemyBehavior : MonoBehaviour
         {
             enemy.SetActive(false);
         }
+    }
+
+    void Update()
+    {
+        if (isChasing)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            Patrol();
+        }
+
+        CheckForPlayer();
     }
 }

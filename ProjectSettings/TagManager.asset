@@ -5,10 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-<<<<<<< HEAD
-  - Battery
-=======
->>>>>>> 75dae6b535c19a9517ef897c1e89ff35d04345f4
   layers:
   - Default
   - TransparentFX
@@ -47,8 +43,11 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 3022699777
+    uniqueID: 4160234109
+    locked: 0
+  - name: Enemies
+    uniqueID: 330862909
     locked: 0
   - name: Players
-    uniqueID: 168049363
+    uniqueID: 2553513
     locked: 0

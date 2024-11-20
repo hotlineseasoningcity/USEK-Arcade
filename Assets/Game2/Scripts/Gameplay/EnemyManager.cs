@@ -4,16 +4,45 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Transform[] enemySpawnPos;
-    public EnemyBehavior enemy2;
+    public GameObject[] enemyPrefabs;
+    public Transform[] enemySpawnPositions, enemyPatrolPositions;
+    public Transform player;
+
+    int maxEnemies = 4;
+    List<GameObject> activeEnemies = new List<GameObject>();
 
     void Start()
     {
-        enemy2.SpawnEnemy(enemySpawnPos);
+        StartCoroutine(SpawnEnemiesCoroutine());
     }
 
-    void Update()
+    IEnumerator SpawnEnemiesCoroutine()
     {
-        enemy2.Patrol();
+        while (true)
+        {
+            activeEnemies.RemoveAll(enemy => enemy == null);
+            if (activeEnemies.Count < maxEnemies)
+            {
+                SpawnEnemies();
+            }
+            yield return null;
+        }
+    }
+
+    void SpawnEnemies()
+    {
+            int randomPrefabIndex = Random.Range(0, enemyPrefabs.Length);
+            int randomSpawnIndex = Random.Range(0, enemySpawnPositions.Length);
+
+            GameObject enemyInstance = Instantiate(enemyPrefabs[randomPrefabIndex], enemySpawnPositions[randomSpawnIndex].position, Quaternion.identity);
+            activeEnemies.Add(enemyInstance);
+            EnemyBehavior enemyBehavior = enemyInstance.GetComponent<EnemyBehavior>();
+
+            if (enemyBehavior != null)
+            {
+                enemyBehavior.player = player;
+                enemyBehavior.patrolPos = enemyPatrolPositions;
+            }
+        
     }
 }
