@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BonusCollect : MonoBehaviour
@@ -9,6 +10,7 @@ public class BonusCollect : MonoBehaviour
     public GameObject prefabPill;
     public int index = -1;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Battery"))
@@ -16,7 +18,10 @@ public class BonusCollect : MonoBehaviour
             index++;
             PillFill(index);
             Destroy(collision.gameObject);
-            Debug.Log("metocaste");
+            if (index >= 10)
+            {
+                SceneManager.LoadScene("GME2_bonus2"); 
+            }
         }
     }
     void PillFill(int _index)
