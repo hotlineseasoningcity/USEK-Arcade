@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BonusCollect : MonoBehaviour
 {
     public Image[] images;
-    public GameObject prefabPill;
+    public GameObject prefabBattery;
     public int index = -1;
 
 
@@ -16,7 +16,7 @@ public class BonusCollect : MonoBehaviour
         if (collision.transform.CompareTag("Battery"))
         {
             index++;
-            PillFill(index);
+            BatteryFill(index);
             Destroy(collision.gameObject);
             if (index >= 9)
             {
@@ -24,7 +24,7 @@ public class BonusCollect : MonoBehaviour
             }
         }
     }
-    void PillFill(int _index)
+    void BatteryFill(int _index)
     {
         for (int i = 0; i < images.Length; i++)
         {
