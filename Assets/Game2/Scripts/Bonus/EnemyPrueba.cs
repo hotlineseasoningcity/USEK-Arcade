@@ -4,47 +4,42 @@ using UnityEngine;
 
 public class EnemyPrueba : MonoBehaviour
 {
-    public Transform positionA, positionB;
-
-    public float speed = 10;
-
-    Transform enemyTransformPosition;
-
-    public Vector2 direction;
-
-    public float radio;
-
-    public bool isRight = true;
-
-    public bool isEnemyInZone = false;
+    public float spd;
+    public float rangeToChangeTarget;
+    public Transform point1;
+    public Transform point2;
+    Vector3 currentTargetPosition;
 
     void Start()
     {
-        enemyTransformPosition = transform;
+        currentTargetPosition = point1.position;
     }
 
     void Update()
     {
-        if (isRight)
+        if (IsOnPoint(point1.position))
         {
-            direction = positionB.position - enemyTransformPosition.position;
+            currentTargetPosition = point2.position;
         }
-        else
+        if (IsOnPoint(point2.position))
         {
-            direction = positionA.position - enemyTransformPosition.position;
-        }
-        if (direction.magnitude <= radio)
-        {
-            isRight = !isRight;
+            currentTargetPosition = point1.position;
         }
 
-        enemyTransformPosition.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
+        MoveToTarget(currentTargetPosition);
+    }
+
+    void MoveToTarget(Vector3 target)
+    {
+        Vector3 dir = target - transform.position;
+        dir.Normalize();
+        transform.position += dir * spd * Time.deltaTime;
+        transform.up = dir;
 
     }
 
-    private void OnDrawGizmos()
+    bool IsOnPoint(Vector3 targetPos)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, radio);
+        return Vector3.Distance(transform.position, targetPos) < rangeToChangeTarget;
     }
 }

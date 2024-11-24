@@ -16,7 +16,7 @@ public class ShieldEnemy : MonoBehaviour, IDamageable
     public float distanceShield;
 
 
-    void Health()
+    void HealthCheck()
     {
         if (life > lifeMax)
         {
@@ -30,7 +30,7 @@ public class ShieldEnemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(float dmg)
+    public void TakeDamage(float dmg)
     {
         if (dmg == 0)
         {
@@ -127,6 +127,6 @@ public class ShieldEnemy : MonoBehaviour, IDamageable
         }
         ProtectEnemy(distanceShield, protectTarget);
         ProtectTimer(protectTarget);
-        Health();
+        HealthCheck();
     }
 }

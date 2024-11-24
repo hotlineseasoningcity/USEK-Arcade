@@ -36,7 +36,7 @@ public class PlayerTest : MonoBehaviour
     }
     void Attack(IDamageable enemy)
     {
-        enemy.Damage(damage);
+        enemy.TakeDamage(damage);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -45,7 +45,7 @@ public class PlayerTest : MonoBehaviour
         {
             Debug.Log(collision.name);
             if (collision.TryGetComponent<IDamageable>(out IDamageable damageable))
-            damageable.Damage(damage);
+            damageable.TakeDamage(damage);
         }
     }
 
