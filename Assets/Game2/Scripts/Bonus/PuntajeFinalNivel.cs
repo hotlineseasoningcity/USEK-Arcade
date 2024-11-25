@@ -9,7 +9,7 @@ public class PuntajeFinalNivel : MonoBehaviour
 
     void Start()
     {
-        GameData.Set("Score", , true);    
+        GameData.Set("Score", 100, true);    
     }
 
     // Update is called once per frame

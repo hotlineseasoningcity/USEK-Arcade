@@ -24,7 +24,7 @@ public class Player1Movement : MonoBehaviour
         player.position += spd * Time.deltaTime * dir;
 
         Vector3 scale = new(scaleSpd, scaleSpd, scaleSpd);
-        Vector3 minScale = Vector3.one;
+        Vector3 minScale = new(2.5f, 2.5f, 2.5f);
 
         if (Input.GetKey(KeyCode.W))
         {
