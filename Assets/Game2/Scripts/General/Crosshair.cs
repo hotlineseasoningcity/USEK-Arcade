@@ -38,8 +38,8 @@ public class Crosshair : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z) && currentEnemy != null)
         {
-            Destroy(currentEnemy.gameObject);
             Debug.Log("enemy dead");
+            Destroy(currentEnemy.gameObject);
             currentEnemy = null;
         }
     }
