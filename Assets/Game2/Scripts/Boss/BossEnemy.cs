@@ -7,7 +7,7 @@ using TMPro;
 public class BossEnemy : MonoBehaviour, IDamageable
 {
     //public GameManager gm;
-    public PlayerTest player;
+    public PlayerManager player;
     public Crosshair crosshair;
 
     public Canvas canvasJuego;
@@ -55,7 +55,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
 
     void HealPlayerUponSpawn()
     {
-        player.life = player.maxLife;
+        player.currentHealth = player.health;
     }
 
     public void TakeDamage(float dmg)
@@ -117,7 +117,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         GameObject newEnemy = Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
         ShieldEnemy enemy = newEnemy.GetComponent<ShieldEnemy>();
         enemy.lifeMax = 4;
-        enemy.distanceShield = 5;
+        enemy.distanceShield = 100;
         enemy.bigBoss = boss;
         enemy.protectTarget = bossEnemy;
         enemy.enemyGoTo = enemyGoToPos;

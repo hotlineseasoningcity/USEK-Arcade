@@ -101,7 +101,7 @@ public class ShieldEnemy : MonoBehaviour, IDamageable
             transform.position -= direction * (spd * 2.5f) * Time.deltaTime;
 
             timeDisapear += Time.deltaTime;
-            if (timeDisapear >= 10)
+            if (timeDisapear >= 5)
             {
                 Destroy(gameObject);
             }
