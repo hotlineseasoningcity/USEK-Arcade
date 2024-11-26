@@ -15,6 +15,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public TextMeshProUGUI textoBossFight;
     public string textoFinal;
     public Sprite[] bossState;
+    public SpriteRenderer bossMode;
 
     public Transform bossEnemy;
     public BossEnemy boss;
@@ -86,14 +87,12 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public void ActivateShield()
     {
         isProtected = true;
-        SpriteRenderer bossMode = GetComponent<SpriteRenderer>();
         bossMode.sprite = bossState[1];
     }
 
     public void DeactivateShield()
     {
         isProtected = false;
-        SpriteRenderer bossMode = GetComponent<SpriteRenderer>();
         bossMode.sprite = bossState[0];
     }
 
@@ -126,9 +125,10 @@ public class BossEnemy : MonoBehaviour, IDamageable
     void Attack()
     {
         player.TakeDamage(damage);
+        bossMode.sprite = bossState[0];
     }
 
-    void ChargeAttack()
+    public void ChargeAttack()
     {
         if (!isProtected)
         {
@@ -143,13 +143,20 @@ public class BossEnemy : MonoBehaviour, IDamageable
 
             if (isAttacking)
             {
+                bossMode.sprite = bossState[2];
+
                 bulletPow += Time.deltaTime;
+                
                 if (bulletPow >= bulletPowTarget)
                 {
                     Attack();
                     bulletPow = 0;
                     isAttacking = false;
                 }
+            }
+            else
+            {
+                bossMode.sprite = bossState[0];
             }
         }
 
