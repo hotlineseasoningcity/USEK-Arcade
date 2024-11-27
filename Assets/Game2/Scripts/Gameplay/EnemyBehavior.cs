@@ -8,7 +8,7 @@ public class EnemyBehavior : MonoBehaviour
     public Transform player, spawnBullet;
     public Transform[] patrolPos;
     public GameObject bulletPrefab;
-    bool isChasing = false, onShootingRange = false;
+    public bool isChasing = false, onShootingRange = false;
     int currentPatrolIndex;
     float timer = 0;
 
@@ -49,8 +49,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         onShootingRange = true;
         Vector3 direction = player.position - transform.position;
-        direction.Normalize();
-        transform.position += enemySpeed * Time.deltaTime * direction;
+        Vector3 targetPosition = direction + Vector3.one * 90;
+        targetPosition.Normalize();
+        transform.position += enemySpeed * Time.deltaTime * targetPosition;
     }
 
     void Shoot()

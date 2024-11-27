@@ -39,7 +39,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
         // Gradually decrease alpha over time
         while (alpha > 0)
         {
-            alpha -= 2.5f * Time.deltaTime; // Decrease alpha
+            alpha -= 1.5f * Time.deltaTime; // Decrease alpha
             alpha = Mathf.Clamp(alpha, 0, 1); // Ensure alpha stays within 0 to 1
             bossMode.color = new Color(1, 1, 1, alpha); // Update color
             yield return null; // Wait for the next frame
@@ -80,12 +80,16 @@ public class BossEnemy : MonoBehaviour, IDamageable
         if (!isProtected)
         {
             life -= dmg;
-            Debug.Log("Boss life: " + life);
+            //Debug.Log("Boss life: " + life);
             timeToAttack -= Random.Range(3, 5);
             if (bulletPow - 0.25f > 0)
             {
                 bulletPow -= 0.25f;
             }
+        }
+        else
+        {
+            Debug.Log("Enemigo esta protejido");
         }
         HealthCheck();
         UpdateHealth();
@@ -212,9 +216,9 @@ public class BossEnemy : MonoBehaviour, IDamageable
             ChargeAttack();
         }
 
-        /*if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(5);
-        }*/
+        }
     }
 }
