@@ -47,14 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7a05e82ea19344eb77f8a41df74f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpd: 20
-  chaseRange: 2
-  shootCoolDown: 1
+  enemySpeed: 50
+  chaseRange: 20
+  shootCoolDown: 0.2
   bulletForce: 100
   player: {fileID: 0}
   spawnBullet: {fileID: 4683308058951232178}
   patrolPos: []
-  bulletPref: {fileID: 627569289349402590, guid: bcaddbf243c91de49847a645a33f5162, type: 3}
+  bulletPrefab: {fileID: 627569289349402590, guid: bcaddbf243c91de49847a645a33f5162, type: 3}
+  isChasing: 0
+  onShootingRange: 0
 --- !u!114 &-4741898397123523966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +103,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.9194107, y: 16.432457}
+  m_Offset: {x: 0.874588, y: -1.0092115}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -112,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 32.261055, y: 25.234673}
+  m_Size: {x: 32.261055, y: 25.832678}
   m_EdgeRadius: 0
 --- !u!1 &8125744247192462420
 GameObject:
@@ -184,10 +186,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 533597059
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baecf20a0278f8f64ac27ba32797be5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4321313097b21a54a9ae0ff622e47faf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
