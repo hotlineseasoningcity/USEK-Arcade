@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   damage: 1
-  crosshair: {fileID: 2086265132}
+  crosshair: {fileID: 1290197093}
 --- !u!1001 &1442363879
 PrefabInstance:
   m_ObjectHideFlags: 0
