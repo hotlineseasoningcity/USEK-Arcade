@@ -29,12 +29,23 @@ public class BossEnemy : MonoBehaviour, IDamageable
     public float damage, bulletPow, bulletPowTarget;
     public float timeToAttack, timeToTarget;
 
-
     IEnumerator BossDeath()
     {
-        Debug.Log("Boss muriendo epicamente");
-        yield return new WaitForSeconds(3);
-        BossDie();
+        float alpha = 1f; // Start with full opacity (1)
+        bossMode.color = new Color(1, 1, 1, alpha); // Set initial color
+
+        //Debug.Log("Boss muriendo epicamente");
+
+        // Gradually decrease alpha over time
+        while (alpha > 0)
+        {
+            alpha -= 2.5f * Time.deltaTime; // Decrease alpha
+            alpha = Mathf.Clamp(alpha, 0, 1); // Ensure alpha stays within 0 to 1
+            bossMode.color = new Color(1, 1, 1, alpha); // Update color
+            yield return null; // Wait for the next frame
+        }
+
+        BossDie(); // Call the BossDie method
     }
 
     void HealthCheck()
@@ -69,7 +80,12 @@ public class BossEnemy : MonoBehaviour, IDamageable
         if (!isProtected)
         {
             life -= dmg;
-            timeToAttack -= Random.Range(3, 5); 
+            Debug.Log("Boss life: " + life);
+            timeToAttack -= Random.Range(3, 5);
+            if (bulletPow - 0.25f > 0)
+            {
+                bulletPow -= 0.25f;
+            }
         }
         HealthCheck();
         UpdateHealth();
@@ -103,8 +119,12 @@ public class BossEnemy : MonoBehaviour, IDamageable
             timeShield += Time.deltaTime;
             if (timeShield >= timeForShield)
             {
+                if (timeToAttack > timeToTarget * 0.5f)
+                {
+                    timeToAttack = timeToTarget * 0.5f;
+                }
                 timeShield = 0;
-                //timeToAttack = 0;
+                bulletPow = 0;
                 SpawnEnemy();
                 timeForShield = Random.Range(8, 10);
             }
@@ -132,7 +152,10 @@ public class BossEnemy : MonoBehaviour, IDamageable
     {
         if (!isProtected)
         {
-            timeToAttack += Time.deltaTime;
+            if (!isAttacking)
+            {
+                timeToAttack += Time.deltaTime;
+            }
 
             if (timeToAttack >= timeToTarget)
             {
@@ -144,7 +167,6 @@ public class BossEnemy : MonoBehaviour, IDamageable
             if (isAttacking)
             {
                 bossMode.sprite = bossState[2];
-
                 bulletPow += Time.deltaTime;
                 
                 if (bulletPow >= bulletPowTarget)
@@ -181,7 +203,18 @@ public class BossEnemy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        TimeToShield();
-        ChargeAttack();
+        if (player.currentHealth > 0)
+        {
+            if (life > 0)
+            {
+                TimeToShield();
+            }
+            ChargeAttack();
+        }
+
+        /*if (Input.anyKeyDown)
+        {
+            TakeDamage(5);
+        }*/
     }
 }
