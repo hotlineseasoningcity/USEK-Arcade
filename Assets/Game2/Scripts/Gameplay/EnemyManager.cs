@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     public Transform[] enemySpawnPositions, enemyPatrolPositions;
-    public Transform player;
+    public Transform player, parent;
 
     int maxEnemies = 4;
     List<GameObject> activeEnemies = new List<GameObject>();
@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
             int randomPrefabIndex = Random.Range(0, enemyPrefabs.Length);
             int randomSpawnIndex = Random.Range(0, enemySpawnPositions.Length);
 
-            GameObject enemyInstance = Instantiate(enemyPrefabs[randomPrefabIndex], enemySpawnPositions[randomSpawnIndex].position, Quaternion.identity);
+            GameObject enemyInstance = Instantiate(enemyPrefabs[randomPrefabIndex], enemySpawnPositions[randomSpawnIndex].position, Quaternion.identity, parent);
             activeEnemies.Add(enemyInstance);
             EnemyBehavior enemyBehavior = enemyInstance.GetComponent<EnemyBehavior>();
 

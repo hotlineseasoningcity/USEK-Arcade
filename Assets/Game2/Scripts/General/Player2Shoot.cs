@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crosshair : MonoBehaviour
+public class Player2Shoot : MonoBehaviour
 {
-    public float speed, damage;
-    public Transform crosshair;
+    public float damage;
+    public Color defaultColor, shootColor;
 
     Collider2D currentEnemy;
+    SpriteRenderer crosshairRenderer;
 
-    public void Movement(Vector2 input)
+    void Awake()
     {
-        float x = input.x;
-        float y = input.y;
-
-        Vector3 direction = new(x, y);
-        direction.Normalize();
-        crosshair.position += speed * Time.deltaTime * direction;
+        crosshairRenderer = gameObject.GetComponent<SpriteRenderer>();
+        crosshairRenderer.color = defaultColor;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,11 +39,29 @@ public class Crosshair : MonoBehaviour
         currentEnemy = null;
     }
 
+    void ChangeColor(Color color)
+    {
+        if (crosshairRenderer != null)
+        {
+            crosshairRenderer.color = color;
+        }
+    }
+
+    void ResetColor()
+    {
+        if (crosshairRenderer != null)
+        {
+            crosshairRenderer.color = defaultColor;
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z) && currentEnemy != null)
         {
             Shoot();
+            ChangeColor(shootColor);
+            Invoke("ResetColor", 0.1f);
         }
     }
 }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public int damage = 1;
+    public float damage = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerManager playerManager = other.GetComponent<PlayerManager>();
-            if (playerManager != null)
+            Health playerHealth = other.GetComponent<Health>();
+            if (playerHealth != null)
             {
-                playerManager.TakeDamage(damage);
-                Destroy(gameObject);
+                playerHealth.TakeDamage(damage);
+                Destroy(gameObject, 0.5f);
             }
         }
     }

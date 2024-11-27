@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    public float enemySpd, chaseRange, shootCoolDown, bulletForce;
+    public float enemySpeed, chaseRange, shootCoolDown, bulletForce;
     public Transform player, spawnBullet;
     public Transform[] patrolPos;
-    public GameObject bulletPref;
+    public GameObject bulletPrefab;
     bool isChasing = false, onShootingRange = false;
     int currentPatrolIndex;
     float timer = 0;
@@ -18,7 +18,7 @@ public class EnemyBehavior : MonoBehaviour
 
         Vector3 direction = patrolPos[currentPatrolIndex].position - transform.position;
         direction.Normalize();
-        transform.position += enemySpd * Time.deltaTime * direction;
+        transform.position += enemySpeed * Time.deltaTime * direction;
 
         if (Vector3.Distance(transform.position, patrolPos[currentPatrolIndex].position) <= 1f)
         {
@@ -50,7 +50,7 @@ public class EnemyBehavior : MonoBehaviour
         onShootingRange = true;
         Vector3 direction = player.position - transform.position;
         direction.Normalize();
-        transform.position += enemySpd * Time.deltaTime * direction;
+        transform.position += enemySpeed * Time.deltaTime * direction;
     }
 
     void Shoot()
@@ -59,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if (timer >= shootCoolDown && onShootingRange)
         {
-            GameObject newBullet = Instantiate(bulletPref, spawnBullet.position, Quaternion.identity);
+            GameObject newBullet = Instantiate(bulletPrefab, spawnBullet.position, Quaternion.identity);
             Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
             rb.AddForce(-Vector2.up * bulletForce, ForceMode2D.Impulse);
 
@@ -69,24 +69,13 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, GameObject enemy)
-    {
-        int hp = 2;
-        int currentHp = hp;
-
-        currentHp -= damage;
-
-        if (currentHp < 1)
-        {
-            enemy.SetActive(false);
-        }
-    }
 
     void Update()
     {
         if (isChasing)
         {
             ChasePlayer();
+            Shoot();
         }
         else
         {

@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 761016201128703039}
   - component: {fileID: -7553335836562386418}
+  - component: {fileID: 1940559487901879661}
   - component: {fileID: 3607227294888916894}
   m_Layer: 0
   m_Name: Enemy 4
@@ -138,6 +139,20 @@ MonoBehaviour:
   spawnBullet: {fileID: 761016201128703039}
   patrolPos: []
   bulletPref: {fileID: 627569289349402590, guid: bcaddbf243c91de49847a645a33f5162, type: 3}
+--- !u!114 &1940559487901879661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3904968503168719769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60ce7d029ab1de02a0eb626ae713654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  health: 2
 --- !u!61 &3607227294888916894
 BoxCollider2D:
   m_ObjectHideFlags: 0

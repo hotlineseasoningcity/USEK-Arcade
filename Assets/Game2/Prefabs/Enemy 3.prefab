@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683308058951232178}
   - component: {fileID: -1965168558183012035}
+  - component: {fileID: -4741898397123523966}
   - component: {fileID: 8436961956522876841}
   m_Layer: 0
   m_Name: Enemy 3
@@ -49,11 +50,25 @@ MonoBehaviour:
   enemySpd: 20
   chaseRange: 2
   shootCoolDown: 1
-  bulletForce: 300
+  bulletForce: 100
   player: {fileID: 0}
   spawnBullet: {fileID: 4683308058951232178}
   patrolPos: []
   bulletPref: {fileID: 627569289349402590, guid: bcaddbf243c91de49847a645a33f5162, type: 3}
+--- !u!114 &-4741898397123523966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381494588639576255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60ce7d029ab1de02a0eb626ae713654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  health: 2
 --- !u!61 &8436961956522876841
 BoxCollider2D:
   m_ObjectHideFlags: 0
