@@ -9,19 +9,22 @@ public class BonusCollect : MonoBehaviour
     public Image[] images;
     public GameObject prefabBattery;
     public int index = -1;
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        if (collision.transform.CompareTag("Battery"))
+        Movement.OnBatteryCollision += BatteryCollision;
+    }
+    private void OnDisable()
+    {
+        Movement.OnBatteryCollision -= BatteryCollision;
+    }
+    private void BatteryCollision(Collider2D collision)
+    {
+        index++;
+        BatteryFill(index);
+        Destroy(collision.gameObject);
+        if (index >= 9)
         {
-            index++;
-            BatteryFill(index);
-            Destroy(collision.gameObject);
-            if (index >= 9)
-            {
-                GameSceneManager.NextLevel();
-            }
+            GameSceneManager.NextLevel();
         }
     }
     void BatteryFill(int _index)

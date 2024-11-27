@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Movement : MonoBehaviour
 {
+    public static event Action<Collider2D> OnBatteryCollision;
     public float x;
     public float y;
     public float spd = 2;
@@ -34,5 +36,9 @@ public class Movement : MonoBehaviour
             transform.up = dir;
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Battery")) OnBatteryCollision?.Invoke(collision);
     }
 }
