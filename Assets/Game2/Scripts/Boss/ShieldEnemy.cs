@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShieldEnemy : MonoBehaviour, IDamageable
 {
     public BossEnemy bigBoss;
+    public Image enemyHealth;
     public float lifeMax, life;
     public float spd;
     public bool isShielding, isProtecting;
@@ -40,6 +42,12 @@ public class ShieldEnemy : MonoBehaviour, IDamageable
         {
             life -= dmg;
         }
+        UpdateHealth();
+    }
+
+    void UpdateHealth()
+    {
+        enemyHealth.fillAmount = life / lifeMax;
     }
 
     void MoveToTarget(Transform target)
