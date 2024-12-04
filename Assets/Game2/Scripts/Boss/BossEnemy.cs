@@ -6,7 +6,7 @@ using TMPro;
 
 public class BossEnemy : MonoBehaviour, IDamageable
 {
-    //public GameManager gm;
+    //public GameManager gameManager;
     public PlayerManager player;
     public Crosshair crosshair;
 
@@ -139,7 +139,7 @@ public class BossEnemy : MonoBehaviour, IDamageable
     {
         GameObject newEnemy = Instantiate(enemyToSpawn, spawnEnemies.position, transform.rotation);
         ShieldEnemy enemy = newEnemy.GetComponent<ShieldEnemy>();
-        enemy.lifeMax = 4;
+        enemy.lifeMax = 10;
         enemy.distanceShield = 100;
         enemy.bigBoss = boss;
         enemy.protectTarget = bossEnemy;
@@ -214,11 +214,6 @@ public class BossEnemy : MonoBehaviour, IDamageable
                 TimeToShield();
             }
             ChargeAttack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(5);
         }
     }
 }

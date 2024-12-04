@@ -41,7 +41,7 @@ public class PlayerTest : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Z))
         {
             Debug.Log(collision.name);
             if (collision.TryGetComponent<IDamageable>(out IDamageable damageable))
