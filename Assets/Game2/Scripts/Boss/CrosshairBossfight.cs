@@ -6,6 +6,7 @@ public class CrosshairBossfight : MonoBehaviour
 {
     public float speed, damage;
     public float limitX, limitY;
+    public Transform screen;
     public Transform crosshair;
     IDamageable target;
 
@@ -18,9 +19,9 @@ public class CrosshairBossfight : MonoBehaviour
         direction.Normalize();
         crosshair.position += speed * direction * Time.deltaTime;
 
-        /*if (crosshair.position.magnitude >= )
+        /*if (crosshair.position.magnitude > limitX)
         {
-
+            crosshair.position = new Vector3(-limitX, y, 0);
         }*/
     }
 
