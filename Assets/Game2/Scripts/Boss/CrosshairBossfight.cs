@@ -5,6 +5,7 @@ using UnityEngine;
 public class CrosshairBossfight : MonoBehaviour
 {
     public float speed, damage;
+    public float limitX, limitY;
     public Transform crosshair;
     IDamageable target;
 
@@ -15,7 +16,12 @@ public class CrosshairBossfight : MonoBehaviour
 
         Vector3 direction = new(x, y);
         direction.Normalize();
-        crosshair.position += speed * Time.deltaTime * direction;
+        crosshair.position += speed * direction * Time.deltaTime;
+
+        /*if (crosshair.position.magnitude >= )
+        {
+
+        }*/
     }
 
     void Attack(IDamageable enemy)
