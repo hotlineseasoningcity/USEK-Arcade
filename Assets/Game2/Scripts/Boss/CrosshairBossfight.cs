@@ -5,36 +5,34 @@ using UnityEngine;
 public class CrosshairBossfight : MonoBehaviour
 {
     public float speed, damage;
-    public float limitX, limitY;
-    public Transform screen;
     public Transform crosshair;
     IDamageable target;
-
+    [SerializeField] private float verticalOffset, horizontalOffset;
     public void Movement(Vector2 input)
     {
-        float x = input.x;
-        float y = input.y;
-
-        Vector3 direction = new(x, y);
-        direction.Normalize();
-        crosshair.position += speed * direction * Time.deltaTime;
-
-        /*if (crosshair.position.magnitude > limitX)
-        {
-            crosshair.position = new Vector3(-limitX, y, 0);
-        }*/
+        Debug.Log(input);
+        input.Normalize();
+        crosshair.position += speed * (Vector3)input * Time.deltaTime;
+        
+        Vector2 screenRelativePosition = Camera.main.WorldToScreenPoint(crosshair.position);
+        screenRelativePosition = new Vector2 (Mathf.Clamp(screenRelativePosition.x, 0+horizontalOffset, Screen.width-horizontalOffset), Mathf.Clamp(screenRelativePosition.y, 0+verticalOffset, Screen.height-verticalOffset));
+        Vector3 desiredPosition = Camera.main.ScreenToWorldPoint(screenRelativePosition);
+        desiredPosition.z = 0;
+        crosshair.position = desiredPosition;
     }
-
-    void Attack(IDamageable enemy)
+    public void Shoot(bool value)
     {
-        enemy.TakeDamage(damage);
-    }
-
-    private void Shoot()
-    {
-        if(target != null)
+        if(target != null && value)
         {
             target.TakeDamage(damage);
+        }
+    }
+
+    public void SpecialShoot(bool value)
+    {
+        if (target != null && value)
+        {
+
         }
     }
 
@@ -54,14 +52,6 @@ public class CrosshairBossfight : MonoBehaviour
             {
                 target = null;
             }
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
         }
     }
 }
