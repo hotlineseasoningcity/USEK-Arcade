@@ -54,4 +54,12 @@ public class CrosshairBossfight : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        /*if (Input.GetKeyDown(KeyCode.Space) && target != null)
+        {
+            Shoot(true);
+        }*/
+    }
 }
