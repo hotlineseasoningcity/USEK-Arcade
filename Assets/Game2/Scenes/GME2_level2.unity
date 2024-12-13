@@ -1049,11 +1049,7 @@ PrefabInstance:
     - target: {fileID: 6608620937405434734, guid: 8b941e687d277e44f9936a0ecc7bc55b, type: 3}
       propertyPath: _players.Array.data[1]._buttonEvents.Array.data[0]._event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-<<<<<<< Updated upstream
       objectReference: {fileID: 7662839738529788073, guid: 4c1cba044dd059a29af89c5bf9766482, type: 3}
-=======
-      objectReference: {fileID: 467987971}
->>>>>>> Stashed changes
     - target: {fileID: 6608620937405434734, guid: 8b941e687d277e44f9936a0ecc7bc55b, type: 3}
       propertyPath: _players.Array.data[0]._buttonEvents.Array.data[0]._event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1557,7 +1553,6 @@ MonoBehaviour:
   currentHealth: 0
   health: 10
   invincibilityDuration: 3
-  isInvincible: 0
 --- !u!1 &1496729946
 GameObject:
   m_ObjectHideFlags: 0
