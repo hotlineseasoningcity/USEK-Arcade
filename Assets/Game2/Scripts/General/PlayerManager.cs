@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] 
     float invincibilityDuration = 3f;
-    bool isInvincible = false;
+    public bool isInvincible = false;
 
     void Awake()
     {
@@ -50,7 +50,10 @@ public class PlayerManager : MonoBehaviour
 
     public void BecomeInvincible(bool value)
     {
-        StartCoroutine(BecomeTemporarilyInvincible());
+        if(value == true)
+        {
+            StartCoroutine(BecomeTemporarilyInvincible());
+        }
     }
 
     IEnumerator BecomeTemporarilyInvincible()
@@ -70,6 +73,7 @@ public class PlayerManager : MonoBehaviour
     private void Die()
     {
         Debug.Log("Object death");
+        GameSceneManager.GameOver();
         Destroy(gameObject);
     }
 
