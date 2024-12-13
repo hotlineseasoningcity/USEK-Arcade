@@ -13,12 +13,25 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         currentHealth = health;
+
+        PlayerHealthBar healthBar = FindObjectOfType<PlayerHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(health);
+            healthBar.SetHealth(currentHealth, health);
+        }
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log($"Took damage: {damage}. Remaining health: {currentHealth}");
+
+        PlayerHealthBar healthBar = FindObjectOfType<PlayerHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth, health);
+        }
 
         if (currentHealth <= 0)
         {

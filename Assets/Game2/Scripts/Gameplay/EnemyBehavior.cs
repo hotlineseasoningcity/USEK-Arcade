@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     public float enemySpeed, chaseRange, shootCoolDown, bulletForce;
+    public AudioSource source;
+    public AudioClip clip;
     public Transform player, spawnBullet;
     public Transform[] patrolPos;
     public GameObject bulletPrefab;
@@ -60,6 +62,8 @@ public class EnemyBehavior : MonoBehaviour
 
         if (timer >= shootCoolDown && onShootingRange)
         {
+            source.PlayOneShot(clip);
+
             GameObject newBullet = Instantiate(bulletPrefab, spawnBullet.position, Quaternion.identity);
             Rigidbody2D rb = newBullet.GetComponent<Rigidbody2D>();
             rb.AddForce(-Vector2.up * bulletForce, ForceMode2D.Impulse);
