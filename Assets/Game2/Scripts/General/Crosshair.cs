@@ -35,18 +35,13 @@ public class Crosshair : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot(bool value)
     {
-        Health enemyHealth = currentEnemy.GetComponent<Health>();
-        enemyHealth.TakeDamage(damage);
-        currentEnemy = null;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z) && currentEnemy != null)
+        if (currentEnemy != null)
         {
-            Shoot();
+            Health enemyHealth = currentEnemy.GetComponent<Health>();
+            enemyHealth.TakeDamage(damage);
+            currentEnemy = null;
         }
     }
 }

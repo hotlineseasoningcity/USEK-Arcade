@@ -10,10 +10,10 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Health playerHealth = other.GetComponent<Health>();
-            if (playerHealth != null)
+            PlayerManager playerManager = other.GetComponent<PlayerManager>();
+            if (playerManager != null)
             {
-                playerHealth.TakeDamage(damage);
+                playerManager.TakeDamage(damage);
                 Destroy(gameObject, 0.5f);
             }
         }
