@@ -102,6 +102,8 @@ public class BossEnemy : MonoBehaviour, IDamageable
 
         canvasJuego.gameObject.SetActive(!gameObject.activeSelf);
         textoBossFight.text = textoFinal;
+
+        //GameSceneManager.NextLevel();
     }
 
     public void ActivateShield()
@@ -148,7 +150,10 @@ public class BossEnemy : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        player.TakeDamage(damage);
+        if (player.isInvincible == false)
+        {
+            player.TakeDamage(damage);
+        }
         bossMode.sprite = bossState[0];
     }
 

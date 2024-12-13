@@ -6,6 +6,8 @@ public class Crosshair : MonoBehaviour
 {
     public float speed, damage;
     public Transform crosshair;
+    public AudioSource source;
+    public AudioClip clip;
 
     Collider2D currentEnemy;
 
@@ -37,11 +39,27 @@ public class Crosshair : MonoBehaviour
 
     public void Shoot(bool value)
     {
+        if (source.isPlaying)
+        {
+            source.Stop();
+        }
+
+        source.PlayOneShot(clip);
+
         if (currentEnemy != null)
         {
             Health enemyHealth = currentEnemy.GetComponent<Health>();
             enemyHealth.TakeDamage(damage);
             currentEnemy = null;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Z))
+        {
+            Shoot(true);
+            //for testing purposes
         }
     }
 }
